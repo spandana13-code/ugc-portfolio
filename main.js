@@ -11,12 +11,12 @@ const WHATSAPP = '918951248412' // ← country code + number, no + or spaces
 //  - soon: true shows a "coming soon" badge
 const REELS = [
   { title: 'Class Day Fits', views: '9.5K', cat: 'fashion', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#b5525e', b: '#4a1820' },
-  { title: 'Kurti collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#c47a5a', b: '#5a2a1c' },
+  { title: 'House of Fab collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#c47a5a', b: '#5a2a1c' },
   { title: 'Day 1: Swara finger positions', views: '51K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#c9a07a', b: '#5e3a24' },
   { title: 'Day 2: First note', views: '27.7K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#a9b7c4', b: '#40505e' },
-  { title: 'The hobby >>>', views: '24.7K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#8a8a8a', b: '#2a2a2a' },
-  { title: 'Pov: missing someone', views: '18.1K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#9a8a86', b: '#34282a' },
-  { title: 'Crochet collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#b39a7a', b: '#4e3a26' },
+  { title: 'The hobby >>>', views: '24.9K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#8a8a8a', b: '#2a2a2a' },
+  { title: 'Pov: missing someone', views: '46K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#9a8a86', b: '#34282a' },
+  { title: 'Happy Knots collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#b39a7a', b: '#4e3a26' },
   { title: 'Day 9: 4th lesson', views: '10.4K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#d4a35a', b: '#5a3a1a' },
 ]
 const CATS = [['all', 'all'], ['fashion', 'style & desi wear'], ['music', 'music'], ['lifestyle', 'lifestyle'], ['collab', 'brand collabs']]

@@ -217,7 +217,11 @@ img+.ph-note{display:none}
 .logos{display:flex;justify-content:center;flex-wrap:wrap;gap:24px;margin-top:36px}
 .logo-b{width:250px;height:110px;border-radius:18px;background:rgba(244,236,221,.08);border:1px solid rgba(227,196,122,.45);display:grid;place-items:center;font-family:Rozha;font-size:26px;color:var(--cream);transition:transform .3s,background .3s}
 .logo-b:hover{transform:translateY(-6px);background:rgba(244,236,221,.14)}
-.logo-b img{max-width:70%;max-height:60%;object-fit:contain}
+.logo-b{display:flex;align-items:center;justify-content:center;gap:16px;width:280px;padding:0 18px}
+.logo-b img{width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--gold2)}
+.logo-b span{text-align:left;font-size:22px;line-height:1.1}
+.logo-b small{display:block;font-family:Pop;font-size:12px;color:#e2c9b8;margin-top:4px}
+.logo-b.dashed{justify-content:center}
 .logo-b.dashed{border-style:dashed;color:var(--gold2);font-family:Hand;font-size:28px}
 
 /* PROCESS */
