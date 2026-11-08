@@ -107,6 +107,7 @@ img+.ph-note{display:none}
 .stat:last-child{border-right:0}
 .stat .n{font-family:Rozha;font-size:clamp(44px,5vw,64px);color:var(--maroon);line-height:1}
 .stat .l{font-size:14px;color:var(--mute);margin-top:8px}
+.stats-date{position:relative;z-index:2;text-align:center;font-family:Hand;font-size:20px;color:var(--mute);padding:6px 0 16px}
 .border-motif{position:relative;z-index:2;height:22px;background:repeating-linear-gradient(90deg,var(--maroon) 0 18px,var(--gold) 18px 22px,var(--maroon) 22px 40px);background-size:40px 22px;animation:motif 18s linear infinite}
 @keyframes motif{to{background-position:400px 0}}
 

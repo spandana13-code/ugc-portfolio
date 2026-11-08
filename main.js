@@ -1,6 +1,16 @@
 /* ============================================================
    EDIT YOUR DETAILS HERE
    ============================================================ */
+// Your stats. Update these once a month from Instagram Insights.
+// count = the number, suffix = what comes after it (K, %, K+ ...)
+const STATS_UPDATED = 'Nov 2026'
+const STATS = [
+  { count: 170, suffix: 'K+', label: 'views in the last 30 days' },
+  { count: 60, suffix: 'K+', label: 'accounts reached, 30 days' },
+  { count: 76, suffix: '%', label: 'of views from non-followers' },
+  { count: 50, suffix: 'K+', label: 'views on my top reel' },
+]
+
 const EMAIL = 'beanveshi@gmail.com' // ← your email for brands
 const WHATSAPP = '918951248412' // ← country code + number, no + or spaces
 
@@ -38,6 +48,16 @@ $$('.js-wa').forEach((a) => (a.href = `https://wa.me/${WHATSAPP}?text=${encodeUR
 const nav = $('#nav')
 const onScroll = () => nav.classList.toggle('solid', scrollY > 40)
 addEventListener('scroll', onScroll, { passive: true }); onScroll()
+
+// stats
+const statsGrid = $('#statsGrid')
+STATS.forEach((s, i) => {
+  const d = document.createElement('div')
+  d.className = 'stat rv' + (i ? ' d' + i : '')
+  d.innerHTML = `<div class="n" data-count="${s.count}" data-suffix="${s.suffix}"${String(s.count).includes('.') ? ' data-dec="1"' : ''}>0</div><div class="l">${s.label}</div>`
+  statsGrid.appendChild(d)
+})
+$('#statsDate').textContent = 'updated ' + STATS_UPDATED + ' ✿'
 
 // reels
 const reelsEl = $('#reels')
