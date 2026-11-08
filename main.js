@@ -64,6 +64,18 @@ CATS.forEach(([id, name], i) => {
   catsEl.appendChild(b)
 })
 
+// 20 before 20 tiles
+const tilesEl = $('#tiles')
+const BACKS = ['a new place?', 'a new skill?', 'a hobby?', 'a little adventure?', 'you decide 👀']
+for (let i = 1; i <= 20; i++) {
+  const t = document.createElement('div')
+  t.className = 'tile' + (i === 1 || i === 20 ? ' star' : '')
+  t.style.setProperty('--d', (i * 0.04).toFixed(2) + 's')
+  t.innerHTML = `<div class="f"><span><b>${String(i).padStart(2, '0')}</b><small>${i === 1 ? 'coming soon' : i === 20 ? 'the big one' : 'soon'}</small></span></div><div class="bk">${i === 20 ? 'turning 20 ✿' : BACKS[i % BACKS.length]}</div>`
+  t.addEventListener('click', () => t.classList.toggle('flip'))
+  tilesEl.appendChild(t)
+}
+
 // reveal on scroll
 const io = new IntersectionObserver((es) => es.forEach((e) => {
   if (!e.isIntersecting) return
@@ -71,7 +83,7 @@ const io = new IntersectionObserver((es) => es.forEach((e) => {
   if (e.target.matches('.stat')) countUp($('.n', e.target))
   io.unobserve(e.target)
 }), { threshold: 0.18, rootMargin: '0px 0px -40px 0px' })
-$$('.rv, .bloom, .pols, .steps, .chat').forEach((el) => io.observe(el))
+$$('.rv, .bloom, .pols, .steps, .chat, .tiles').forEach((el) => io.observe(el))
 
 // stats count up
 function countUp(el) {
