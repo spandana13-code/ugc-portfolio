@@ -1,7 +1,8 @@
 /* ============================================================
    EDIT YOUR DETAILS HERE
    ============================================================ */
-const EMAIL = 'hello@email.com' // ← your email for brands
+const EMAIL = 'beanveshi@gmail.com' // ← your email for brands
+const WHATSAPP = '918951248412' // ← country code + number, no + or spaces
 
 // Your reels. For each one:
 //  - video: put the .mp4 in the /media folder and write 'media/name.mp4' (plays on hover)
@@ -28,6 +29,10 @@ const touch = matchMedia('(hover: none)').matches
 
 // email everywhere
 $$('.js-email').forEach((a) => { a.href = 'mailto:' + EMAIL; if (a.textContent.includes('@')) a.textContent = a.textContent.replace(/[\w.+-]+@[\w.-]+/, EMAIL) })
+
+// WhatsApp links with a ready message
+const waMsg = "Hi Spandana! I'm from ___ and I'd love to collab with you ✿"
+$$('.js-wa').forEach((a) => (a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMsg)}`))
 
 // nav background on scroll
 const nav = $('#nav')
@@ -125,3 +130,48 @@ $$('.phone').forEach((p) => tilt(p, 10))
 
 // like button
 $('#like').onclick = (e) => { const b = e.currentTarget; b.classList.toggle('on'); b.textContent = b.classList.contains('on') ? '♥' : '♡' }
+
+// collab inquiry form
+const form = $('#inq'), msg = $('#formMsg'), sendBtn = $('#send')
+function collect() {
+  const d = new FormData(form)
+  return {
+    name: (d.get('name') || '').trim(), brand: (d.get('brand') || '').trim(), email: (d.get('email') || '').trim(),
+    handle: (d.get('handle') || '').trim(), product: d.get('product'), timeline: d.get('timeline'),
+    needs: d.getAll('needs').join(', ') || 'Not sure yet', budget: (d.get('budget') || '').trim() || '-', message: (d.get('message') || '').trim() || '-',
+  }
+}
+function validate(needEmail = true) {
+  let ok = true
+  ;['name', 'brand'].concat(needEmail ? ['email'] : []).forEach((n) => {
+    const el = form.elements[n], bad = !el.value.trim() || (n === 'email' && !/^\S+@\S+\.\S+$/.test(el.value.trim()))
+    el.classList.toggle('bad', bad); if (bad) ok = false
+  })
+  msg.textContent = ok ? '' : 'Please fill in the highlighted fields ✿'
+  return ok
+}
+const summary = (v) => `Brand: ${v.brand}\nName: ${v.name}\nEmail: ${v.email}\nInstagram/website: ${v.handle || '-'}\nProduct: ${v.product}\nNeeds: ${v.needs}\nTimeline: ${v.timeline}\nBudget: ${v.budget}\nMessage: ${v.message}`
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  if (form.elements._honey.value) return
+  if (!validate()) return
+  const v = collect()
+  sendBtn.disabled = true; sendBtn.textContent = 'Sending…'
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/' + EMAIL, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ _subject: `New collab inquiry: ${v.brand}`, _template: 'table', _replyto: v.email, ...v }),
+    })
+    if (!res.ok) throw new Error()
+    form.hidden = true; $('#thanks').hidden = false
+  } catch {
+    sendBtn.disabled = false; sendBtn.textContent = 'Send inquiry ✿'
+    msg.innerHTML = `Couldn't send right now. <a href="mailto:${EMAIL}?subject=${encodeURIComponent('Collab inquiry: ' + v.brand)}&body=${encodeURIComponent(summary(v))}" style="text-decoration:underline">Send it by email instead</a> or use WhatsApp.`
+  }
+})
+$('#sendWa').addEventListener('click', () => {
+  if (!validate(false)) return
+  const v = collect()
+  open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hi Spandana! Collab inquiry ✿\n\n' + summary(v))}`, '_blank', 'noopener')
+})
+form.addEventListener('input', (e) => { if (e.target.classList.contains('bad') && e.target.value.trim()) e.target.classList.remove('bad') })
