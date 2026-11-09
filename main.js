@@ -29,7 +29,7 @@ const REELS = [
   { title: 'Happy Knots collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#b39a7a', b: '#4e3a26' },
   { title: 'Day 9: 4th lesson', views: '10.4K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#d4a35a', b: '#5a3a1a' },
 ]
-const CATS = [['all', 'all'], ['fashion', 'style & desi wear'], ['music', 'music'], ['lifestyle', 'lifestyle'], ['collab', 'brand collabs']]
+const CATS = [['all', 'All'], ['fashion', 'Style & desi wear'], ['music', 'Music'], ['lifestyle', 'Lifestyle'], ['collab', 'Brand collabs']]
 /* ============================================================ */
 
 const $ = (s, el = document) => el.querySelector(s)
@@ -69,7 +69,7 @@ REELS.forEach((r) => {
   card.innerHTML = `<div class="reel-ph" style="--a:${r.a};--b:${r.b}">
     ${r.poster ? `<img src="${r.poster}" alt="" loading="lazy">` : ''}
     ${r.video ? `<video src="${r.video}" muted loop playsinline preload="none"${r.poster ? ` poster="${r.poster}"` : ''}></video>` : ''}
-    ${r.views ? `<span class="views">▶ ${r.views}</span>` : ''}${r.soon ? '<span class="soon">coming soon</span>' : ''}
+    ${r.views ? `<span class="views">▶ ${r.views}</span>` : ''}${r.soon ? '<span class="soon">Coming soon</span>' : ''}
     <span class="play"></span><div class="cap"><b>${r.title}</b>${CATS.find((c) => c[0] === r.cat)[1]}</div></div>`
   reelsEl.appendChild(card)
   const v = $('video', card)
