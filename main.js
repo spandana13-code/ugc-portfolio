@@ -20,12 +20,12 @@ const WHATSAPP = '918951248412' // ← country code + number, no + or spaces
 //  - link: the Instagram link for that reel (opens on click)
 //  - soon: true shows a "coming soon" badge
 const REELS = [
-  { title: 'Class Day Fits', views: '9.5K', cat: 'fashion', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#b5525e', b: '#4a1820' },
+  { title: 'Class Day Fits', views: '9.5K', cat: 'fashion', video: 'media/class-day-fits.mp4', poster: 'media/class-day-fits.jpg', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#b5525e', b: '#4a1820' },
   { title: 'House of Fab collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#c47a5a', b: '#5a2a1c' },
+  { title: 'Pov: missing someone', views: '46K', cat: 'lifestyle', video: 'media/pov.mp4', poster: 'media/pov.jpg', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#9a8a86', b: '#34282a' },
   { title: 'Day 1: Swara finger positions', views: '51K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#c9a07a', b: '#5e3a24' },
   { title: 'Day 2: First note', views: '27.7K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#a9b7c4', b: '#40505e' },
   { title: 'The hobby >>>', views: '24.9K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#8a8a8a', b: '#2a2a2a' },
-  { title: 'Pov: missing someone', views: '46K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#9a8a86', b: '#34282a' },
   { title: 'Happy Knots collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#b39a7a', b: '#4e3a26' },
   { title: 'Day 9: 4th lesson', views: '10.4K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#d4a35a', b: '#5a3a1a' },
 ]
@@ -78,6 +78,15 @@ REELS.forEach((r) => {
     card.addEventListener('mouseleave', () => { v.pause(); card.classList.remove('playing') })
   }
 })
+// on phones (no hover), play videos while they're on screen
+if (touch) {
+  const vio = new IntersectionObserver((es) => es.forEach((e) => {
+    const v = e.target, card = v.closest('.phone')
+    if (e.isIntersecting) v.play().then(() => card.classList.add('playing')).catch(() => {})
+    else { v.pause(); card.classList.remove('playing') }
+  }), { threshold: 0.6 })
+  $$('.phone video').forEach((v) => { v.preload = 'metadata'; vio.observe(v) })
+}
 const catsEl = $('#cats')
 CATS.forEach(([id, name], i) => {
   const b = document.createElement('button')
