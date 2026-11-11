@@ -23,11 +23,11 @@ const REELS = [
   { title: 'Class Day Fits', views: '9.5K', cat: 'fashion', video: 'media/class-day-fits.mp4', poster: 'media/class-day-fits.jpg', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#b5525e', b: '#4a1820' },
   { title: 'House of Fab collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#c47a5a', b: '#5a2a1c' },
   { title: 'Pov: missing someone', views: '46K', cat: 'lifestyle', video: 'media/pov.mp4', poster: 'media/pov.jpg', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#9a8a86', b: '#34282a' },
-  { title: 'Day 1: Swara finger positions', views: '51K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#c9a07a', b: '#5e3a24' },
-  { title: 'Day 2: First note', views: '27.7K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#a9b7c4', b: '#40505e' },
-  { title: 'The hobby >>>', views: '24.9K', cat: 'lifestyle', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#8a8a8a', b: '#2a2a2a' },
+  { title: 'Day 2: First note', views: '27.7K', cat: 'music', video: 'media/day1.mp4', poster: 'media/day1.jpg', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#a9b7c4', b: '#40505e' },
+  { title: 'Never stopped being curious', views: '', cat: 'lifestyle', video: 'media/curious.mp4', poster: 'media/curious.jpg', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#8a8a8a', b: '#2a2a2a' },
   { title: 'Happy Knots collab', views: '', cat: 'collab', video: '', poster: '', link: '', soon: true, a: '#b39a7a', b: '#4e3a26' },
-  { title: 'Day 9: 4th lesson', views: '10.4K', cat: 'music', video: '', poster: '', link: 'https://www.instagram.com/be_anveshi/reels/', a: '#d4a35a', b: '#5a3a1a' },
+  { title: 'Your brand here ✿', views: '', cat: 'collab', video: '', poster: '', link: '#contact', slot: true, a: '#7A1C2C', b: '#3E0A14' },
+  { title: 'Your brand here ✿', views: '', cat: 'collab', video: '', poster: '', link: '#contact', slot: true, a: '#7A1C2C', b: '#3E0A14' },
 ]
 const CATS = [['all', 'All'], ['fashion', 'Style & desi wear'], ['music', 'Music'], ['lifestyle', 'Lifestyle'], ['collab', 'Brand collabs']]
 /* ============================================================ */
@@ -65,12 +65,13 @@ REELS.forEach((r) => {
   const card = document.createElement(r.link ? 'a' : 'div')
   card.className = 'phone rv'
   card.dataset.cat = r.cat
-  if (r.link) { card.href = r.link; card.target = '_blank'; card.rel = 'noopener' }
+  if (r.link) { card.href = r.link; if (!r.link.startsWith('#')) { card.target = '_blank'; card.rel = 'noopener' } }
+  if (r.slot) card.classList.add('slot')
   card.innerHTML = `<div class="reel-ph" style="--a:${r.a};--b:${r.b}">
     ${r.poster ? `<img src="${r.poster}" alt="" loading="lazy">` : ''}
     ${r.video ? `<video src="${r.video}" muted loop playsinline preload="none"${r.poster ? ` poster="${r.poster}"` : ''}></video>` : ''}
-    ${r.views ? `<span class="views">▶ ${r.views}</span>` : ''}${r.soon ? '<span class="soon">Coming soon</span>' : ''}
-    <span class="play"></span><div class="cap"><b>${r.title}</b>${CATS.find((c) => c[0] === r.cat)[1]}</div></div>`
+    ${r.views ? `<span class="views">▶ ${r.views}</span>` : ''}${r.soon ? '<span class="soon">Coming soon</span>' : ''}${r.slot ? '<span class="soon">Open slot</span>' : ''}
+    ${r.slot ? '<span class="slot-plus">+</span>' : r.soon ? '<span class="soon-mark">✿</span>' : '<span class="play"></span>'}<div class="cap"><b>${r.title}</b>${r.slot ? 'Let\'s make your reel' : CATS.find((c) => c[0] === r.cat)[1]}</div></div>`
   reelsEl.appendChild(card)
   const v = $('video', card)
   if (v) {

@@ -211,6 +211,12 @@ img+.ph-note{display:none}
 .tile.star .f{background:var(--gold2);border-color:var(--gold)}
 .sticker.s5{left:30%;top:-2%;--rr:-3deg;animation-delay:-4.4s}
 
+.phone.slot .reel-ph{border:2px dashed rgba(227,196,122,.6)}
+.slot-plus{position:absolute;z-index:3;left:50%;top:50%;translate:-50% -50%;width:64px;height:64px;border-radius:50%;border:2px dashed var(--gold2);color:var(--gold2);display:grid;place-items:center;font-family:Rozha;font-size:40px;line-height:1;transition:transform .3s}
+.phone.slot:hover .slot-plus{transform:rotate(90deg) scale(1.1)}
+
+.soon-mark{position:absolute;z-index:3;left:50%;top:50%;translate:-50% -50%;font-size:46px;color:rgba(255,245,230,.8);animation:sway 6s ease-in-out infinite}
+
 /* BRANDS */
 .brands{padding:80px 0;text-align:center}
 .brands .hand{color:var(--pink);font-size:28px}
